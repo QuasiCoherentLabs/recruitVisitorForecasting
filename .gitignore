@@ -91,6 +91,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+.kaggleVenv
 
 # Spyder project settings
 .spyderproject
