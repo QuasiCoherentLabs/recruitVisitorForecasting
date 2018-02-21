@@ -67,6 +67,12 @@ For the truncated historical data series `ƒ_T(t)` where `T` is day we truncate 
 
 ### Boosting from residuals
 
+For the unfamiliar, _boosting_ is the process of modeling the residuals produced by the predictions from a model. i.e. the `i^(th)` residual takes the form `r_i = y_i - \hat{y}_i` where `y_i` is the observed value and `\hat{y}_i` is the models predicted value. If one is able to accurately model even the direction of the residuals, it makes a very powerful addition to any predictive model. In fact, it is ubiquitous in the Kaggle community and almost a requirement for placing well in any of their competitions. 
+
+Our first attempt at modeling the residuals produced by our ARIMA models was made by simply throwing the same model which produced them. Predictably, this did not fair well. As one knows, ARIMA works by modeling and removing various seasonal patterns, until there is nothing left but white noise (as far as time-series data goes). The next - slightly less naive - attempt was made by putting the residual series through the same optimization process we used to produce the initial models. Again, there are not many temporal patterns left in the data after ARIMA gets done with it, so this did not work much better. 
+
+Finally, we ended up using a regression of the residuals against the number of reservations made for that day. 
+
 ## A many-series Forecasting Pipeline
 
 ### Dealing with lots of models
